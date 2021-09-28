@@ -3,9 +3,13 @@
 </template>
 
 <script>
+import { getAllUser } from '~/api/users';
+
+
 export default {
-  mounted() {
-    console.log("coucou")
+  async mounted() {
+    const users = await getAllUser();
+    console.log(users);
   }
 }
 </script>
