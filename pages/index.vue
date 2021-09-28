@@ -3,13 +3,16 @@
 </template>
 
 <script>
-import { getAllUser } from '~/api/users';
+import { auth } from "~/plugins/firebase";
+import { getToken } from '~/api/auth';
 
 
 export default {
   async mounted() {
-    const users = await getAllUser();
-    console.log(users);
+    await auth.setPersistence('local');
+    await auth.signInWithEmailAndPassword('corentin.lissillour304@gmail.com', "123456");
+    const token = await getToken();
+    console.log(token); 
   }
 }
 </script>

@@ -9,7 +9,10 @@ const firebaseConfig = {
   appId: process.env.APPID
 };
 // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+let app = null
+if (!firebase.apps.length) {
+  app = firebase.initializeApp(firebaseConfig)
+}
 
 
-export const auth = firebase.auth();
+export const auth = firebase.auth()
