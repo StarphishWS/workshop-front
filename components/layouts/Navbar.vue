@@ -1,10 +1,12 @@
 <template>
-  <nav :class="{ 'bg-white': !primary, 'bg-primary': primary }" class="w-full py-6 px-8">
+  <nav
+    :class="{ 'bg-white': !primary, 'bg-primary': primary }"
+    class="w-full py-6 px-8"
+  >
     <div class="flex items-center justify-between">
       <!-- Header logo -->
       <div>
-        <Logo />
-    
+        <Logo :dark="!primary" />
       </div>
 
       <!-- Mobile toggle -->
@@ -27,12 +29,21 @@
       <!-- Navbar -->
       <div class="hidden md:block">
         <ul class="flex space-x-8 text-lg font-normal font-sans">
-          <li :class="{'text-white': primary}" v-for="link of links" :key="link.anchor"><a :href="link.anchor" class="">{{ link.name }}</a></li>
+          <li
+            :class="{ 'text-white': primary }"
+            v-for="link of links"
+            :key="link.anchor"
+          >
+            <a :href="link.anchor" class="">{{ link.name }}</a>
+          </li>
           <li>
             <a
-              href="#"
-              :class="{'bg-primary hover:bg-primary-dark text-white':!primary, 'bg-white text-primary':primary}"
-              class="cta px-5 py-3 rounded-full font-medium"
+              @click="login()"
+              :class="{
+                'bg-primary hover:bg-primary-dark text-white': !primary,
+                'bg-white text-primary': primary
+              }"
+              class="cta px-5 cursor-pointer py-3 rounded-full font-medium"
               >Connexion</a
             >
           </li>
@@ -94,16 +105,19 @@
 
         <ul class="divide-y font-sans">
           <li v-for="link of links" :key="link.anchor">
-            <a :href="link.anchor" @click="isOpen = false" class="my-4 inline-block"
-              > {{ link.name }} </a
+            <a
+              :href="link.anchor"
+              @click="isOpen = false"
+              class="my-4 inline-block"
             >
+              {{ link.name }}
+            </a>
           </li>
           <li>
-            <a
-              href="#"
-              @click="isOpen = false"
-              class="my-8 w-full text-center font-semibold cta inline-block bg-primary hover:bg-primary-dark px-7 py-2 rounded-full text-white font-medium"
-              >Connexion</a
+            <button
+              @click="login()"
+              class="my-8 w-full cursor-pointer text-center font-semibold cta inline-block bg-primary hover:bg-primary-dark px-7 py-2 rounded-full text-white font-medium"
+              >Connexion</button
             >
           </li>
         </ul>
@@ -188,6 +202,7 @@
 
 <script>
 import Logo from "~/components/layouts/Logo.vue";
+import { mapState } from "vuex";
 
 export default {
   name: "Navbar",
@@ -219,9 +234,22 @@ export default {
       isOpen: false
     };
   },
+  computed: {
+    ...mapState({
+      user: state => state.auth.user
+    })
+  },
   methods: {
     drawer() {
       this.isOpen = !this.isOpen;
+    },
+    login() {
+      if (this.user.id) {
+        this.$router.push("/dashboard");
+      } else {
+        this.$router.push("/login");
+      }
+      this.isOpen = false; 
     }
   },
   watch: {
