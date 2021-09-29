@@ -1,6 +1,6 @@
 <template>
   <div
-    class="flex flex-col w-full md:w-64 text-gray-700 bg-primary flex-shrink-0"
+    class="min-h-screen fixed flex flex-col w-full md:w-64 text-gray-700 bg-primary flex-shrink-0"
   >
     <div
       class="flex-shrink-0 px-8 py-10 flex flex-row items-center justify-between"
