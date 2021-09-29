@@ -1,5 +1,4 @@
 <template>
-  <Tutorial/>
 </template>
 
 <script>
@@ -10,7 +9,7 @@ import { getToken } from '~/api/auth';
 export default {
   async mounted() {
     await auth.setPersistence('local');
-    await auth.signInWithEmailAndPassword('corentin.lissillour304@gmail.com', "123456");
+    await auth.signInWithEmailAndPassword('nicolas.dol@epsi.fr', "123456");
     const token = await getToken();
     console.log(token); 
   }
