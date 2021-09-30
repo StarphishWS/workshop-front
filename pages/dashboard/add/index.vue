@@ -75,16 +75,25 @@
 
     <div class="mt-20">
       <button
+        @click="createCampaign()"
+        :disabled="!verifForm"
         class="block bg-primary hover:bg-primary-dark disabled:opacity-50 text-white rounded-full py-4 px-10 mx-auto"
       >
-        Créer la campagne
+        <Loading v-if="loading" />
+        <span v-if="!loading"> Créer la campagne</span>
       </button>
     </div>
   </div>
 </template>
 <script>
+import { postCampaign } from "~/api/campaign";
+import { verifEmail } from "~/utils/regex";
+import { showToast } from "~/utils/toast";
+import Loading from "~/components/layouts/Loading.vue";
+
 export default {
   layout: "dashboard",
+  components: { Loading },
   data() {
     return {
       form: {
@@ -99,17 +108,37 @@ export default {
           }
         ]
       },
-      selectedTemplate: 0
+      loading: false
     };
   },
   computed: {
-    //   verifForm() {
-    //       if(this.form)
-    //   }
+    verifForm() {
+      if (
+        this.form.title !== "" &&
+        this.form.template === "google" &&
+        this.verifEmployee()
+      ) {
+        return true;
+      }
+      return false;
+    }
   },
   methods: {
     selectTemplate(template) {
       this.form.template = template;
+    },
+    verifEmployee() {
+      for (const employee of this.form.employees) {
+        console.log(employee);
+        if (
+          employee.firstname === "" ||
+          employee.lastname === "" ||
+          !verifEmail(employee.email)
+        ) {
+          return false;
+        }
+      }
+      return true;
     },
     addEmployee() {
       const newId = this.form.employees[this.form.employees.length - 1].id + 1;
@@ -124,6 +153,38 @@ export default {
     removeEmployee(id) {
       if (this.form.employees.length > 1) {
         this.form.employees = this.form.employees.filter(e => e.id !== id);
+      }
+    },
+    async createCampaign() {
+      try {
+        if (this.loading) return false;
+
+        this.loading = true;
+
+        const form = {
+          ...this.form,
+          employees: this.form.employees.map(e => ({
+            firstname: e.firstname,
+            lastname: e.lastname,
+            email: e.email
+          }))
+        };
+
+        await postCampaign(form);
+         showToast(
+          "Succès",
+          "Votre campagne a été crée avec succès",
+        );
+         this.loading = false;
+        this.$router.push("/dashboard");
+      } catch (error) {
+        console.log(error);
+        showToast(
+          "Erreur",
+          "Une erreur est survenue, veuillez réessayer",
+          "bg-red-500"
+        );
+        this.loading = false;
       }
     }
   }

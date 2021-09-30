@@ -8,3 +8,11 @@ export const getAllCampaigns = async () => {
   });
   return response.data;
 };
+
+export const postCampaign = async data => {
+  const token = await getToken();
+  const response = await api.post("/campaign", data, {
+    headers: { Authorization: token }
+  });
+  return response.data;
+};
