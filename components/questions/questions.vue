@@ -47,11 +47,11 @@
         <div v-if="displayCorrection" class="mt-4">
           <div
             v-if="msgCorrection(0)"
-            class="bg-green-400 p-2 rounded-lg text-white"
+            class="bg-green-400 w-max p-2 rounded-lg text-white"
           >
             Vous avez répondu correctement à la question !
           </div>
-          <div v-else class="bg-red-400 p-2 rounded-lg text-white">
+          <div v-else class="bg-red-400 w-max p-2 rounded-lg text-white">
             C'est la mauvaise réponse ! La bonne réponse est la 1er réponse !
           </div>
         </div>
@@ -107,11 +107,11 @@
         <div v-if="displayCorrection" class="mt-4">
           <div
             v-if="msgCorrection(1)"
-            class="bg-green-400 p-2 rounded-lg text-white"
+            class="bg-green-400 w-max p-2 rounded-lg text-white"
           >
             Vous avez répondu correctement à la question !
           </div>
-          <div v-else class="bg-red-400 p-2 rounded-lg text-white">
+          <div v-else class="bg-red-400 w-max p-2 rounded-lg text-white">
             C'est la mauvaise réponse ! La bonne réponse est la 2ème réponse !
           </div>
         </div>
@@ -168,11 +168,11 @@
         <div v-if="displayCorrection" class="mt-4">
           <div
             v-if="msgCorrection(2)"
-            class="bg-green-400 p-2 rounded-lg text-white"
+            class="bg-green-400 p-2 w-max rounded-lg text-white"
           >
             Vous avez répondu correctement à la question !
           </div>
-          <div v-else class="bg-red-400 p-2 rounded-lg text-white">
+          <div v-else class="bg-red-400 w-max p-2 rounded-lg text-white">
             C'est la mauvaise réponse ! La bonne réponse est la 2ème réponse !
           </div>
         </div>

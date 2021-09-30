@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-white">
     <div class="flex flex-col items-center content-login">
       <div class="mt-10 mb-5">
         <svg
@@ -50,19 +50,55 @@
       <div class="content-input">
         <div class="group">
           <input type="password" required />
-          <label>Mot de passe ?</label>
+          <label>Mot de passe</label>
         </div>
         <span class="mdp-forget">Mot de passe oublié ?</span>
       </div>
       <div>
-        <button>Connexion</button>
+        <button :disabled="loading" @click="fakeLogin()">Connexion</button>
       </div>
     </div>
   </div>
 </template>
 <script>
+import { putEmployeesById } from "~/api/employee";
 export default {
-  layout: "default-template"
+  layout: "default-template",
+  data() {
+    return {
+      loading: false
+    };
+  },
+  async mounted() {
+    try {
+      const id = this.$route.query.id;
+
+      if (id) {
+        console.log(id);
+        await putEmployeesById(id, "click");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  methods: {
+    async fakeLogin() {
+      try {
+        this.loading = true;
+        const id = this.$route.query.id;
+        if (id) {
+          setTimeout(async () => {
+            await putEmployeesById(id, "form");
+            this.$router.push("/questions");
+            this.loading = false;
+          }, 1000);
+        }
+
+      } catch (error) {
+        console.log(error);
+      }
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -110,6 +146,10 @@ export default {
     font-size: 0.875rem;
     color: white;
     padding: 10px 16px;
+
+    &:disabled {
+      opacity: 0.5;
+    }
   }
 }
 
