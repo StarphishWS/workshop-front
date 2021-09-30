@@ -1,6 +1,6 @@
 <template>
   <svg
-    class="animate-spin mx-auto h-5 w-5 text-white"
+    :class="`animate-spin mx-auto h-5 w-5 text-${color}`"
     xmlns="http://www.w3.org/2000/svg"
     fill="none"
     viewBox="0 0 24 24"
@@ -22,6 +22,11 @@
 </template>
 <script>
 export default {
-    name: "Loading"
+    name: "Loading", 
+    props: {
+      color: {
+        default: 'white'
+      }
+    }
 }
 </script>

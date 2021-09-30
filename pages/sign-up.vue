@@ -1,7 +1,7 @@
 <template>
   <div class="pt-20 mx-auto max-w-640">
     <h1 class="text-center font-bold text-3xl">Inscription</h1>
-    <form @submit.prevent="sigUp()" class="flex flex-col gap-y-5 mt-5">
+    <form @submit.prevent="signUp()" class="flex flex-col gap-y-5 mt-5">
       <div class="flex gap-x-2">
         <input
           v-model="form.firstname"

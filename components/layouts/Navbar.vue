@@ -6,7 +6,9 @@
     <div class="flex items-center justify-between">
       <!-- Header logo -->
       <div>
+        <nuxt-link to="/">
         <Logo :dark="!primary" />
+        </nuxt-link>
       </div>
 
       <!-- Mobile toggle -->
@@ -220,11 +222,11 @@ export default {
       links: [
         {
           name: "Présentation",
-          anchor: "#presentation"
+          anchor: "#slogan"
         },
         {
           name: "Offre",
-          anchor: "#offre"
+          anchor: "#offers"
         },
         {
           name: "Contact",
