@@ -45,7 +45,7 @@ export default {
         },
         {
           title: "Ajouter une campagnes",
-          link: "/add-campaign"
+          link: "/dashboard/add"
         },
         {
           title: "Ajouter des contact",
