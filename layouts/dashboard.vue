@@ -2,7 +2,7 @@
   <div>
     <div class="md:flex flex-col md:flex-row md:min-h-screen w-full">
       <SideBar />
-      <div class="ml-64 w-full min-h-screen">
+      <div class="ml-64 w-full min-h-screen bg-gray-50">
         <div class="w-full min-h-screen">
           <Nuxt />
         </div>
