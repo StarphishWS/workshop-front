@@ -7,6 +7,7 @@
     <div v-if="!loading" class="p-12 grid grid-cols-3 gap-4">
       <CampaignCard v-for="campaign of campaigns" :key="campaign.id" :campaign="campaign" />
     </div>
+    <!-- This is an example component -->
   </div>
 </template>
 <script>
@@ -16,9 +17,10 @@ import { getAllCampaigns } from '~/api/campaign';
 import { showToast } from "~/utils/toast";
 
 
+
 export default {
   layout: "dashboard",
-  components: { CampaignCard, Loading },
+  components: { CampaignCard, Loading, },
   data() {
     return {
       campaigns: [], 
